@@ -41,7 +41,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //validator
-const { check, validationResult } = require('express-validator');
+const { check, validationResult } = require('express-validator/check');
 
 app.post('/', [
   // username must be an email
