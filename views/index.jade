@@ -88,6 +88,7 @@ block content
           <table class="table">
             <thead>
               <tr>
+              <th scope="col"> </th>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
@@ -98,11 +99,13 @@ block content
             </thead>
             <tbody>
             {list.map((item, index)=>{
-              const {name, email, uname , contact, _id} = item;
+              const {name, email, uname , contact, _id, profileimage} = item;
+              const imagePath =  `./users/img/${profileimage}`
 
               return(
                 <tr>
-                <th scope="row">{index+1}</th>
+                 <td> <img class="profile" src={imagePath}/></td>
+                <td>  {index+1}</td>
                 <td><Input 
                 type="text" 
                 name="name" 

@@ -6,11 +6,31 @@ var User = require("../models/user");
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 var nodeMailer = require("nodemailer");
+const fs = require('fs');
+const path = require('path');
 const { check, validationResult } = require("express-validator/check");
 /* GET users listing. */
 router.get("/", function (req, res, next) {
   res.send("respond with a resource");
 });
+
+router.get('/img/:filename', (req, res) => {
+ 
+
+const id =  req.params.filename;
+
+ const imagePath = path.resolve(__dirname, '../uploads/', id);
+
+ if (!fs.existsSync(imagePath)) {
+   // If the image file does not exist, return a 404 error
+   return res.status(404).send(imagePath);
+ }
+
+ const imageData = fs.readFileSync(imagePath);
+ res.setHeader('Content-Type', 'image/jpeg');
+ res.send(imageData);
+
+})
 
 router.get("/members", (req, res, next) => {
    User.getMembers().then((data)=> {
